@@ -28,8 +28,8 @@ class MidasHybrid(object):
 
 if __name__ == "__main__":
     local_path = "./data/cityscapes"
-    dataset_train = cityscapesLoader(local_path, split="train")
-    dataset_val = cityscapesLoader(local_path, split="val")
+    dataset_train = CityscapesDataset(local_path, split="train")
+    dataset_val = CityscapesDataset(local_path, split="val")
     midas_predictor = MidasHybrid()
 
     debug = True
