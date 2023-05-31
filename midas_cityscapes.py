@@ -46,9 +46,10 @@ if __name__ == "__main__":
         depth_map = midas_predictor.pred_depth_map(img) 
         depth_map = depth_map / depth_map.max()
         print(depth_map.shape)
+        print(depth_map.max(), depth_map.min())
 
         cv2.imwrite("./debug/{}_img_debug.png".format(debug_counter), img)
-        cv2.imwrite("./debug/{}_depth_map_debug.png".format(debug_counter), depth_map)
+        cv2.imwrite("./debug/{}_depth_map_debug.png".format(debug_counter), depth_map*255)
 
         debug_counter += 1
         if debug_counter > debug_num:
