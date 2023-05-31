@@ -41,6 +41,7 @@ if __name__ == "__main__":
         os.makedirs("debug")
     for img, gt_seg, img_path in dataset_train:
         print(img_path)
+        print(img.shape)
         depth_map = midas_predictor.pred_depth_map(img) 
         depth_map = depth_map / depth_map.max()
 

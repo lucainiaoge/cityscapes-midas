@@ -202,7 +202,6 @@ class CityscapesDataset(data.Dataset):
 
         img = cv2.imread(img_path)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        img = np.array(img, dtype=np.uint8)
 
         lbl = cv2.imread(lbl_path)
 
