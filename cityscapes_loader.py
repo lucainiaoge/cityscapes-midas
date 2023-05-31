@@ -205,7 +205,6 @@ class CityscapesDataset(data.Dataset):
         img = np.array(img, dtype=np.uint8)
 
         lbl = cv2.imread(lbl_path)
-        lbl = self.encode_segmap(np.array(lbl, dtype=np.uint8))
 
         return img, lbl, img_path
 
