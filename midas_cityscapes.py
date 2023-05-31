@@ -13,7 +13,7 @@ class MidasHybrid(object):
         self.midas.eval()
         self.midas_transform = torch.hub.load("intel-isl/MiDaS", "transforms").dpt_transform
 
-    def pred_depth_map(img):
+    def pred_depth_map(self, img):
         img_torch = torch.from_numpy(img).to(self.device)
         input_batch = self.midas_transform(img_torch).to(self.device)
 
