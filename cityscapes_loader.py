@@ -201,7 +201,7 @@ class CityscapesDataset(data.Dataset):
             os.path.basename(img_path)[:-15] + "gtFine_labelIds.png",
         )
 
-        img = cv2.imread(filename)
+        img = cv2.imread(img_path)
         img = cv2.cvtColor(img_midas, cv2.COLOR_BGR2RGB)
         img = np.array(img, dtype=np.uint8)
 
