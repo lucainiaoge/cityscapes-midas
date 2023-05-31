@@ -10,7 +10,6 @@ import numpy as np
 
 import cv2
 import torch
-import scipy.misc as m
 from torch.utils import data
 
 from collections import OrderedDict
@@ -205,7 +204,7 @@ class CityscapesDataset(data.Dataset):
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img = np.array(img, dtype=np.uint8)
 
-        lbl = m.imread(lbl_path)
+        lbl = cv2.imread(lbl_path)
         lbl = self.encode_segmap(np.array(lbl, dtype=np.uint8))
 
         return img, lbl, img_path
