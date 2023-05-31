@@ -47,9 +47,8 @@ if __name__ == "__main__":
         depth_map = depth_map / depth_map.max()
         print(depth_map.shape)
 
-        cv2.imwrite("./debug/{}_img_debug.png".format(debug_counter), np.transpose(img, (2,0,1)))
-        # cv2.imwrite("./debug/{}_gt_seg_debug.png".format(debug_counter), np.transpose(gt_seg, (2,0,1)))
-        cv2.imwrite("./debug/{}_depth_map_debug.png".format(debug_counter), np.transpose(depth_map, (2,0,1)))
+        cv2.imwrite("./debug/{}_img_debug.png".format(debug_counter), img)
+        cv2.imwrite("./debug/{}_depth_map_debug.png".format(debug_counter), depth_map)
 
         debug_counter += 1
         if debug_counter > debug_num:
