@@ -37,20 +37,22 @@ if __name__ == "__main__":
     midas_predictor = MidasHybrid()
 
     for img, gt_seg, img_path in dataset_train:
-        print("MiDaS processing image", img_path)
+        print("MiDaS processing image:", img_path)
         depth_map = midas_predictor.pred_depth_map(img) 
         depth_map = depth_map / depth_map.max()
         
         img_path_list = list(os.path.split(img_path))
         img_filename = img_path_list[-1]
         depth_map_filename = img_filename[:-15] + DEPTH_MAP_SUFFIX + ".png"
+        print("Depth map filename:", depth_map_filename)
 
         depth_map_dir_list = img_path_list[:-1]
-        depth_map_dir_list[-5] = DEPTH_MAP_SUFFIX
+        depth_map_dir_list[-3] = DEPTH_MAP_SUFFIX
         depth_map_dir = os.path.join(depth_map_dir_list)
 
         if not os.path.exists(depth_map_dir):
             os.makedirs(depth_map_dir)
+        print("Depth map path:", depth_map_dir)
 
         depth_map_path = os.path.join(depth_map_dir, depth_map_filename)
 
