@@ -36,7 +36,7 @@ if __name__ == "__main__":
 
     dataset_train = CityscapesDataset(local_path, split="train")
     dataset_val = CityscapesDataset(local_path, split="val")
-    dataset_trainval = ConcatDataset(dataset_train, dataset_val)
+    dataset_trainval = ConcatDataset([dataset_train, dataset_val])
 
     midas_predictor = MidasHybrid()
 
