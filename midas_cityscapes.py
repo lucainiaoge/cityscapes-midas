@@ -49,7 +49,7 @@ if __name__ == "__main__":
 
         depth_map_dir_list = img_path_list[:-1]
         depth_map_dir_list[-3] = DEPTH_MAP_SUFFIX
-        depth_map_dir = os.path.join(depth_map_dir_list)
+        depth_map_dir = os.path.join(*depth_map_dir_list)
 
         if not os.path.exists(depth_map_dir):
             os.makedirs(depth_map_dir)
