@@ -4,6 +4,8 @@ import cv2
 import torch
 from cityscapes_loader import CityscapesDataset
 
+DEPTH_MAP_SUFFIX = "DepthMap"
+
 class MidasHybrid(object):
     def __init__(self):
         self.model_type = "DPT_Hybrid"
@@ -34,23 +36,23 @@ if __name__ == "__main__":
     dataset_val = CityscapesDataset(local_path, split="val")
     midas_predictor = MidasHybrid()
 
-    debug = True
-    debug_num = 10
-    debug_counter = 0
-    if not os.path.exists("debug"):
-        os.makedirs("debug")
     for img, gt_seg, img_path in dataset_train:
-        print(img_path)
-        print(img.shape)
-        # print(gt_seg.shape)
+        print("MiDaS processing image", img_path)
         depth_map = midas_predictor.pred_depth_map(img) 
         depth_map = depth_map / depth_map.max()
-        print(depth_map.shape)
-        print(depth_map.max(), depth_map.min())
+        
+        img_path_list = os.path.split(img_path)
+        img_filename = img_path_list[-1]
+        depth_map_filename = img_filename[:-15] + DEPTH_MAP_SUFFIX + ".png"
 
-        cv2.imwrite("./debug/{}_img_debug.png".format(debug_counter), img)
-        cv2.imwrite("./debug/{}_depth_map_debug.png".format(debug_counter), depth_map*255)
+        depth_map_dir_list = img_path_list[:-1]
+        depth_map_dir_list[-5] = DEPTH_MAP_SUFFIX
+        depth_map_dir = os.path.join(depth_map_dir_list)
 
-        debug_counter += 1
-        if debug_counter > debug_num:
-            break
+        if not os.path.exists(depth_map_dir):
+            os.makedirs(depth_map_dir)
+
+        depth_map_path = os.path.join(depth_map_dir, depth_map_filename)
+
+        cv2.imwrite(depth_map_path, depth_map*255)
+
