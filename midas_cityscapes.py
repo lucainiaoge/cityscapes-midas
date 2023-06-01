@@ -2,6 +2,7 @@ import os
 import numpy as np
 import cv2
 import torch
+from torch.utils.data import ConcatDataset
 from cityscapes_loader import CityscapesDataset
 
 DEPTH_MAP_SUFFIX = "DepthMap"
@@ -32,11 +33,14 @@ class MidasHybrid(object):
 
 if __name__ == "__main__":
     local_path = "./data/cityscapes"
+
     dataset_train = CityscapesDataset(local_path, split="train")
     dataset_val = CityscapesDataset(local_path, split="val")
+    dataset_trainval = ConcatDataset(dataset_train, dataset_val)
+
     midas_predictor = MidasHybrid()
 
-    for img, gt_seg, img_path in dataset_train:
+    for img, gt_seg, img_path in dataset_trainval:
         print("MiDaS processing image:", img_path)
         depth_map = midas_predictor.pred_depth_map(img) 
         depth_map = depth_map / depth_map.max()
