@@ -5,7 +5,7 @@ import torch
 from torch.utils.data import ConcatDataset
 from cityscapes_loader import CityscapesDataset
 
-DEPTH_MAP_SUFFIX = "DepthMap"
+DEPTH_MAP_SUFFIX = "depthMap"
 
 class MidasHybrid(object):
     def __init__(self):
