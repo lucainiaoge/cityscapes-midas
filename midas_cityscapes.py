@@ -41,7 +41,7 @@ if __name__ == "__main__":
         depth_map = midas_predictor.pred_depth_map(img) 
         depth_map = depth_map / depth_map.max()
         
-        img_path_list = os.path.split(img_path)
+        img_path_list = list(os.path.split(img_path))
         img_filename = img_path_list[-1]
         depth_map_filename = img_filename[:-15] + DEPTH_MAP_SUFFIX + ".png"
 
